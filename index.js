@@ -28,10 +28,10 @@ app.get('/counter', (req, res) => {
 })
 
 app.use('/api/v1', authRouter);
-app.use('/api/v1', [authMiddleware,rateLimiter], dataRouter);
+app.use('/api/v1', rateLimiter, dataRouter);
 
 // Health check
-app.use('/healthz', (req, res) => {
+app.get('/healthz', (req, res) => {
     try {
         return res.status(200).json({"message": 'Healthy'});
     } catch (error) {
@@ -43,7 +43,12 @@ app.use('/healthz', (req, res) => {
 mongoose.connect(process.env.DB_CONNECTION).then(() => {
     console.log('DB connected...')
 }).catch(err => console.log(err));
-// listen
-app.listen(PORT, () => {
+
+try {
+    // listen
+    app.listen(PORT, () => {
     console.log(`app listening port:${PORT}`)
 })
+} catch (error) {
+    return res.status(500).json({success:false,msg:error.message})
+}

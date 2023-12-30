@@ -9,6 +9,20 @@ router.post("/data", (req, res) => {
         return res.status(500).json({success:false,msg:error.message})
     }
 })
+router.get("/data", (req, res) => {
+    try {
+        return res.status(400).json({success:false,msg:'You have to send a POST request along with your api key!'})
+    } catch (error) {
+        return res.status(500).json({success:false,msg:error.message})
+    }
+})
+router.get("/data/:apiKey", (req, res) => {
+    try {
+        return res.status(400).json({success:false,msg:'You have to send a POST request not GET request!'})
+    } catch (error) {
+        return res.status(500).json({success:false,msg:error.message})
+    }
+})
 router.post('/data/:apiKey', dataController)
 
 module.exports = router;

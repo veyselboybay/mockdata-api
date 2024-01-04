@@ -42,9 +42,12 @@ app.get('/healthz', (req, res) => {
 })
 
 // db connection
-mongoose.connect(process.env.DB_CONNECTION).then(() => {
-    console.log('DB connected...')
-}).catch(err => console.log(err));
+const connectDB = async () => {
+    await mongoose.connect(process.env.DB_CONNECTION).then(() => {
+        console.log('DB connected...')
+    }).catch(err => console.log(err));
+}
+connectDB();
 
 try {
     // listen

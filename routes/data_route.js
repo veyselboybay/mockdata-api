@@ -1,5 +1,7 @@
 const router = require('express').Router()
-const {dataController} = require('../controllers/data_controller')
+const { dataController,playgroundController } = require('../controllers/data_controller')
+const { authMiddleware } = require('../middlewares/auth_middleware')
+
 
 
 router.post("/data", (req, res) => {
@@ -24,5 +26,7 @@ router.get("/data/:apiKey", (req, res) => {
     }
 })
 router.post('/data/:apiKey', dataController)
+
+router.post('/playground/:apiKey',authMiddleware,playgroundController)
 
 module.exports = router;

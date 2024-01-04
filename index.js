@@ -18,7 +18,9 @@ let counter = 0;
 // app middlewares
 app.set('trust proxy', 1)
 app.get('/ip', (req, res) => res.send(req.ip));
-app.use(cors())
+app.use(cors({
+    origin: process.env.CLIENT_ORIGIN
+}))
 app.use(helmet())
 app.use(express.json())
 app.use((req,res,next) => {

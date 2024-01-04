@@ -14,7 +14,7 @@ const rateLimiter = setRateLimit({
 const rateLimiterPlayground = setRateLimitPlayground({
     windowMs: 24 *60 *60 *1000,
     // windowMs: 60 *1000,
-    max: 5,
+    max: 10,
     message: `{success: false, msg: "You have exceeded your 5 request per min limit."}`,
     // headers: true,
     handler: function (req, res,next) {

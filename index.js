@@ -5,8 +5,9 @@ const helmet = require('helmet')
 require('dotenv').config()
 const authRouter = require('./routes/auth_route')
 const dataRouter = require('./routes/data_route')
+const playgroundRouter = require('./routes/playground_route')
 const { authMiddleware } = require('./middlewares/auth_middleware')
-const { rateLimiter } = require('./middlewares/ratelimit')
+const { rateLimiter,rateLimiterPlayground } = require('./middlewares/ratelimit')
 
 const app = express()
 
@@ -28,7 +29,8 @@ app.get('/counter', (req, res) => {
 })
 
 app.use('/api/v1', authRouter);
-app.use('/api/v1', rateLimiter, dataRouter);
+app.use('/api/v1', dataRouter);
+app.use('/api/v1/playground', playgroundRouter);
 
 // Health check
 app.get('/healthz', (req, res) => {

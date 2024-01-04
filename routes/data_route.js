@@ -1,6 +1,6 @@
 const router = require('express').Router()
-const { dataController,playgroundController } = require('../controllers/data_controller')
-const { authMiddleware } = require('../middlewares/auth_middleware')
+const { dataController } = require('../controllers/data_controller')
+const { rateLimiter } = require('../middlewares/ratelimit')
 
 
 
@@ -25,8 +25,7 @@ router.get("/data/:apiKey", (req, res) => {
         return res.status(500).json({success:false,msg:error.message})
     }
 })
-router.post('/data/:apiKey', dataController)
+router.post('/data/:apiKey',rateLimiter, dataController)
 
-router.post('/playground/:apiKey',authMiddleware,playgroundController)
 
 module.exports = router;

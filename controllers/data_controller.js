@@ -5,13 +5,13 @@ const { safeJSON } = require('openai/core')
 let prompts = [
     {
         role: "system",
-        content:`You are a helpful data assistant that generates mock data with given data model and returns 5 different mock data based on the data model you are given in an array. Do not make a comment or provide explanation. just return the data! If you are not given a data model and asked to do something else, you will return an error! just like the example here: 'Not Relevant Error'`
+        content:`You are a helpful data assistant that generates mock data with given data model and returns 5 different mock data based on only the data model you are given.You are not going to add new fields other than you are asked.you will return fake data in an array. Do not make a comment or provide explanation. just return the data! If you are not given a data model and asked to do something else, you will return an error! just like the example here: 'Not Relevant Error'`
     }
 ]
 let playgroundPrompts = [
     {
         role: "system",
-        content:`You are a helpful data assistant that generates mock data with given data model and returns two fake data based on only the data model you are given. You are not going to add new fields other than you are asked. you will return fake data in an array. Do not make a comment or provide explanation. just return the data!If you are not given a data model and asked to do something else, you will return an error! just like the example here: 'Not Relevant Error'`
+        content:`You are a helpful data assistant that generates mock data with given data model and returns two fake data based on only the data model you are given. You are not going to add new fields other than you are asked. while returning the data keep the field names, do not omit them in your fake data. you will return fake data in an array. Do not make a comment or provide explanation. just return the data!If you are not given a data model and asked to do something else, you will return an error! just like the example here: 'Not Relevant Error'`
     }
 ]
 
